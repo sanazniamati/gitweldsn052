@@ -200,6 +200,7 @@ export default function HY_Butt() {
             xCoordinateLeftShape={xCoordinateLeftShape}
             bDistance={bDistance}
             aLeftShape={aLeftShape}
+            factor={factor}
           />
           <RightShape
             show={show}

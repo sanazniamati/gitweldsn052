@@ -7,6 +7,7 @@ function BottomShape({
   bDistance,
   aLeftShape,
   show,
+  factor,
 }) {
   return (
     <Group>
@@ -22,7 +23,7 @@ function BottomShape({
       <Arrow
         visible={show}
         x={xCoordinateLeftShape}
-        points={[aLeftShape + 3, 606, bDistance, 606]}
+        points={[aLeftShape + 3, 606, bDistance * factor, 606]}
         pointerLength={3}
         pointerWidth={5}
         pointerAtBeginning={true}
