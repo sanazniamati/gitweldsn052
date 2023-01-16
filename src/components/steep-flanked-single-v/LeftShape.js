@@ -1,4 +1,5 @@
 import { Arrow, Group, Line, Shape, Text } from "react-konva";
+import { PropTypes } from "prop-types";
 
 function LeftShape({
   xCoordinateLeftShape,
@@ -8,16 +9,19 @@ function LeftShape({
   y3LeftShape,
   y2LeftShape,
   y1LeftShape,
+  show,
 }) {
   return (
     <Group>
       <Line
+        visible={show}
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
         points={[-95, bLeftShape, 0, bLeftShape]}
       />
       <Arrow
+        visible={show}
         x={xCoordinateLeftShape}
         points={[-95, bLeftShape + 3, -95, 196 - 3]}
         pointerLength={5}
@@ -27,12 +31,14 @@ function LeftShape({
         strokeWidth={3}
       />
       <Line
+        visible={show}
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
         points={[-95, 196, 0, 196]}
       />
       <Text
+        visible={show}
         x={xCoordinateLeftShape - 135}
         y={y1LeftShape - 10}
         text={"t2"}
@@ -60,5 +66,15 @@ function LeftShape({
     </Group>
   );
 }
+LeftShape.propTypes = {
+  xCoordinateLeftShape: PropTypes.number.isRequired,
+  initialXLeftShape: PropTypes.number.isRequired,
+  bLeftShape: PropTypes.number.isRequired,
+  y1LeftShape: PropTypes.number.isRequired,
+  y2LeftShape: PropTypes.number.isRequired,
+  y3LeftShape: PropTypes.number.isRequired,
+  y4LeftShape: PropTypes.number.isRequired,
+  show: PropTypes.bool,
+};
 
 export default LeftShape;

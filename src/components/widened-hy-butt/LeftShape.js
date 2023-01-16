@@ -1,6 +1,6 @@
 import React from "react";
 import { Arrow, Group, Line, Shape, Text } from "react-konva";
-
+import { PropTypes } from "prop-types";
 function LeftShape({
   xCoordinateLeftShape,
   aLeftShape,
@@ -29,7 +29,7 @@ function LeftShape({
       <Arrow
         visible={show}
         x={xCoordinateLeftShape}
-        points={[0 + 3, -56, aLeftShape - 3, -56]}
+        points={[3, -56, aLeftShape - 3, -56]}
         pointerLength={5}
         pointerWidth={5}
         pointerAtBeginning={true}
@@ -70,5 +70,14 @@ function LeftShape({
     </Group>
   );
 }
+LeftShape.propTypes = {
+  xCoordinateLeftShape: PropTypes.number.isRequired,
+  aLeftShape: PropTypes.number.isRequired,
+  x1LeftShape: PropTypes.number.isRequired,
+  x2LeftShape: PropTypes.number.isRequired,
+  x3LeftShape: PropTypes.number.isRequired,
+  x4LeftShape: PropTypes.number.isRequired,
+  show: PropTypes.bool,
+};
 
 export default LeftShape;

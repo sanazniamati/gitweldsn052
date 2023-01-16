@@ -19,7 +19,8 @@ export default function HY_Butt() {
   const [yCPRightShape, setYCPRightShape] = useState(207);
   //left shape
   const [aLeftShape, setALeftShape] = useState(114);
-  const [t2, setT2] = useState(aLeftShape);
+  // const [aRightShape, setARightShape] = useState(147);
+  const [t2, setT2] = useState(114);
   const [x1LeftShape, setX1LeftShape] = useState(52);
   const [x2LeftShape, setX2LeftShape] = useState(55);
   const [x3LeftShape, setX3LeftShape] = useState(61);
@@ -27,7 +28,7 @@ export default function HY_Butt() {
   //bottomShape
   const [xCoordinateLeftShape, setXCoordinateLeftShape] = useState(0);
   const [xCoordinateRightShape, setXCoordinateRightShape] = useState(0);
-  const [bDistance, setBDistance] = useState(144);
+  const [bDistance, setBDistance] = useState(147 - 114);
   //choose unit
   // 1cm --> 37.8 pixel
   // 1mm --> 3.78 pixel
@@ -49,7 +50,7 @@ export default function HY_Butt() {
   }
   //347-bRightShape=151 --> initialStateT1
   //aLeftShape-0=114 --> initialStateT2
-  //initialBDistance = 144;
+  let initialBDistance = 33;
   useEffect(() => {
     if (t1 >= 151) {
       setBRightShape(196 - (t1 * factor - 151));
@@ -70,27 +71,39 @@ export default function HY_Butt() {
     }
     if (t2 >= 114) {
       setALeftShape(114 + (t2 * factor - 114));
+      setBDistance(initialBDistance - (t2 * factor - 114));
+      console.log("T2 initialBDistance: " + initialBDistance);
+      console.log("T2 bDistance" + bDistance);
+      // setBDistance(bDistance - (t2 * factor - 114));
       setX1LeftShape(51 + (t2 * factor - 114) / 2);
       setX2LeftShape(55 + (t2 * factor - 114) / 2);
       setX3LeftShape(61 + (t2 * factor - 114) / 2);
       setX4LeftShape(64 + (t2 * factor - 114) / 2);
     } else {
       setALeftShape(114 - (114 - t2 * factor));
+      setBDistance(initialBDistance + (114 - t2 * factor));
+      // setBDistance(bDistance + (114 - t2 * factor));
       setX1LeftShape(51 - (114 - t2 * factor) / 2);
       setX2LeftShape(55 - (114 - t2 * factor) / 2);
       setX3LeftShape(61 - (114 - t2 * factor) / 2);
       setX4LeftShape(64 - (114 - t2 * factor) / 2);
     }
-    if (bDistance >= 144) {
-      setXCoordinateRightShape((bDistance * factor - 144) / 2);
-      setXCoordinateLeftShape(0 - (bDistance * factor - 144) / 2);
-    } else {
-      setXCoordinateRightShape(0 - (144 - bDistance * factor) / 2);
-      setXCoordinateLeftShape((144 - bDistance * factor) / 2);
-    }
 
     setR(r);
-  }, [type, factor, t1, t2, bDistance, r]);
+  }, [type, factor, t1, t2, r, aLeftShape]);
+  const handelOnChangeBDistance = (e) => {
+    initialBDistance = e.target.value;
+    setBDistance(initialBDistance);
+    console.log("initialBDistance: " + initialBDistance);
+    console.log("BDistance: " + bDistance);
+    if (e.target.value >= 33) {
+      setXCoordinateRightShape((e.target.value - 33) / 2);
+      setXCoordinateLeftShape(0 - (e.target.value - 33) / 2);
+    } else {
+      setXCoordinateRightShape(0 - (33 - e.target.value) / 2);
+      setXCoordinateLeftShape((33 - e.target.value) / 2);
+    }
+  };
   const handelIncT2 = () => {
     setT2(Number(t2) + 5);
   };
@@ -105,10 +118,10 @@ export default function HY_Butt() {
     }
   };
   const handelIncT1 = () => {
-    setT1(Number(t1) + 5);
+    setT1(t1 + 5);
   };
   const handelDecT1 = () => {
-    setT1(Number(t1) - 5);
+    setT1(t1 - 5);
   };
   const handelOnChangeT1 = (e) => {
     if (e.target.value > 0) {
@@ -123,13 +136,7 @@ export default function HY_Butt() {
   const handelDecB = () => {
     setBDistance(bDistance - 5);
   };
-  const handelOnChangeBDistance = (e) => {
-    if (e.target.value > 0) {
-      setBDistance(Number(e.target.value));
-    } else {
-      console.log("Error: input value for bDistance ");
-    }
-  };
+
   const handelIncR = () => {
     setR(r + 5);
   };
@@ -143,7 +150,6 @@ export default function HY_Butt() {
       console.log("Error");
     }
   };
-
   const handelSelect = (e) => {
     setType(e.target.value);
   };
@@ -165,7 +171,6 @@ export default function HY_Butt() {
       <button onClick={handelDecT1}>t1 -</button>
       <input type={"number"} onChange={handelOnChangeT1} value={t1} />
       <button onClick={handelIncT1}>t1 +</button>
-      {/*<p>{error}</p>*/}
       <button onClick={handelDecB}> b - </button>
       <input
         type={"number"}
@@ -198,9 +203,9 @@ export default function HY_Butt() {
             show={show}
             xCoordinateRightShape={xCoordinateRightShape}
             xCoordinateLeftShape={xCoordinateLeftShape}
-            bDistance={bDistance}
+            bDistance={bDistance * factor}
             aLeftShape={aLeftShape}
-            factor={factor}
+            t2={t2}
           />
           <RightShape
             show={show}

@@ -1,9 +1,29 @@
-import { Stage, Layer, Line } from "react-konva";
-import { useState } from "react";
+import { Stage, Layer } from "react-konva";
+import { useState, useEffect } from "react";
 import LeftShape from "./LeftShape";
 import RightShape from "./RightShape";
 import BottomShape from "./BottomShape";
 export default function SteepFlankedSingleV() {
+  const [show, setShow] = useState(true);
+  //choose unit
+  // 1cm --> 37.8 pixel
+  // 1mm --> 3.78 pixel
+  // 1 inch --> 96 pixel
+  let factor;
+  const [type, setType] = useState("pixel");
+  switch (type) {
+    case "centimeter":
+      factor = 37.8;
+      break;
+    case "millimeter":
+      factor = 3.78;
+      break;
+    case "inch":
+      factor = 96;
+      break;
+    default:
+      factor = 1;
+  }
   let f = 196;
   const [grad, setGrad] = useState(15);
   //LeftShape
@@ -30,46 +50,62 @@ export default function SteepFlankedSingleV() {
   // for calc b distance
   const [xCoordinateLeftShape, setXCoordinateLeftShape] = useState(0);
   const [xCoordinateRightShape, setXCoordinateRightShape] = useState(0);
-  const [bDistance, setBDistance] = useState(346);
+  const [bDistance, setBDistance] = useState(350 - 277);
   const [width, setWidth] = useState(316);
   let initialXQuadratic = (xAdditionalLine + 360) / 2;
+  useEffect(() => {
+    if (t1 >= f) {
+      setBRightShape(0 - (t1 * factor - f));
+      setY1RightShape(88 - (t1 * factor - f) / 2);
+      setY2RightShape(93 - (t1 * factor - f) / 2);
+      setY3RightShape(103 - (t1 * factor - f) / 2);
+      setY4RightShape(109 - (t1 * factor - f) / 2);
+      setYBetaBigLine(-81 - (t1 * factor - f));
+      setYBetaSmallLine(-78 - (t1 * factor - f));
+    } else {
+      setBRightShape(f - t1 * factor);
+      setY1RightShape(88 + (f - t1 * factor) / 2);
+      setY2RightShape(93 + (f - t1 * factor) / 2);
+      setY3RightShape(103 + (f - t1 * factor) / 2);
+      setY4RightShape(109 + (f - t1 * factor) / 2);
+      setYBetaBigLine(-81 + (f - t1 * factor));
+      setYBetaSmallLine(-78 + (f - t1 * factor));
+    }
+    if (t2 >= f) {
+      setBLeftShape(0 - (t2 * factor - f));
+      setY1LeftShape(88 - (t2 * factor - f) / 2);
+      setY2LeftShape(93 - (t2 * factor - f) / 2);
+      setY3LeftShape(103 - (t2 * factor - f) / 2);
+      setY4LeftShape(109 - (t2 * factor - f) / 2);
+    } else {
+      setBLeftShape(f - t2 * factor);
+      setY1LeftShape(88 + (f - t2 * factor) / 2);
+      setY2LeftShape(93 + (f - t2 * factor) / 2);
+      setY3LeftShape(103 + (f - t2 * factor) / 2);
+      setY4LeftShape(109 + (f - t2 * factor) / 2);
+    }
+    if (bDistance >= 73) {
+      setWidth(316 + (bDistance * factor - 73));
+      setXCoordinateRightShape((bDistance * factor - 73) / 2);
+      setXCoordinateLeftShape(0 - (bDistance * factor - 73) / 2);
+    } else {
+      setWidth(316 - (73 - bDistance * factor));
+      setXCoordinateRightShape(0 - (73 - bDistance * factor) / 2);
+      setXCoordinateLeftShape((73 - bDistance * factor) / 2);
+    }
+  }, [type, factor, t1, t2, bDistance, f]);
+
   const handelIncT2 = () => {
-    setT2(f - bLeftShape);
-    console.log("T2: " + t2);
-    setBLeftShape(bLeftShape - 10);
-    setY4LeftShape(y4LeftShape - 5);
-    setY3LeftShape(y3LeftShape - 5);
-    setY2LeftShape(y2LeftShape - 5);
-    setY1LeftShape(y1LeftShape - 5);
+    setT2(Number(t2) + 5);
   };
   const handelDecT2 = () => {
-    setT2(f - bLeftShape);
-    console.log("T2: " + t2);
-    setBLeftShape(bLeftShape + 10);
-    setY4LeftShape(y4LeftShape + 5);
-    setY3LeftShape(y3LeftShape + 5);
-    setY2LeftShape(y2LeftShape + 5);
-    setY1LeftShape(y1LeftShape + 5);
+    setT2(Number(t2) - 5);
   };
   const handelIncT1 = () => {
-    setBRightShape(bRightShape - 10);
-    setT1(f - bRightShape);
-    setY4RightShape(y4RightShape - 5);
-    setY3RightShape(y3RightShape - 5);
-    setY2RightShape(y2RightShape - 5);
-    setY1RightShape(y1RightShape - 5);
-    setYBetaSmallLine(yBetaSmallLine - 10);
-    setYBetaBigLine(yBetaBigLine - 10);
+    setT1(Number(t1) + 5);
   };
   const handelDecT1 = () => {
-    setBRightShape(bRightShape + 10);
-    setT1(f - bRightShape);
-    setY4RightShape(y4RightShape + 5);
-    setY3RightShape(y3RightShape + 5);
-    setY2RightShape(y2RightShape + 5);
-    setY1RightShape(y1RightShape + 5);
-    setYBetaSmallLine(yBetaSmallLine + 10);
-    setYBetaBigLine(yBetaBigLine + 10);
+    setT1(Number(t1) - 5);
   };
   const handelIncBeta = () => {
     setGrad(grad + 5);
@@ -77,83 +113,45 @@ export default function SteepFlankedSingleV() {
   const handelDecBeta = () => {
     setGrad(grad - 5);
   };
-  const handelIncB = () => {
-    setBDistance(bDistance + 10);
-    setWidth(width + 10);
-    setXCoordinateLeftShape(xCoordinateLeftShape - 5);
-    setXCoordinateRightShape(xCoordinateRightShape + 5);
-  };
-  const handelDecB = () => {
-    setBDistance(bDistance - 10);
-    setWidth(width - 10);
-    console.log(bDistance);
-    setXCoordinateLeftShape(xCoordinateLeftShape + 5);
-    setXCoordinateRightShape(xCoordinateRightShape - 5);
-  };
   const handelOnChangeT1 = (e) => {
     setT1(e.target.value);
-    console.log("t1: " + e.target.value);
-    if (e.target.value >= f) {
-      setBRightShape(0 - (e.target.value - f));
-      setY1RightShape(88 - (e.target.value - f) / 2);
-      setY2RightShape(93 - (e.target.value - f) / 2);
-      setY3RightShape(103 - (e.target.value - f) / 2);
-      setY4RightShape(109 - (e.target.value - f) / 2);
-      setYBetaBigLine(-81 - (e.target.value - f));
-      setYBetaSmallLine(-78 - (e.target.value - f));
-    } else {
-      setBRightShape(f - e.target.value);
-      setY1RightShape(88 + (f - e.target.value) / 2);
-      setY2RightShape(93 + (f - e.target.value) / 2);
-      setY3RightShape(103 + (f - e.target.value) / 2);
-      setY4RightShape(109 + (f - e.target.value) / 2);
-      setYBetaBigLine(-81 + (f - e.target.value));
-      setYBetaSmallLine(-78 + (f - e.target.value));
-    }
   };
   const handelOnChangeT2 = (e) => {
     setT2(e.target.value);
-    console.log("t2: " + e.target.value);
-    if (e.target.value >= f) {
-      setBLeftShape(0 - (e.target.value - f));
-      console.log("bLeftShape: " + (0 - (e.target.value - f)));
-      setY1LeftShape(88 - (e.target.value - f) / 2);
-      console.log("y1LeftShape: " + (88 - (e.target.value - f) / 2));
-      setY2LeftShape(93 - (e.target.value - f) / 2);
-      console.log("y2LeftShape: " + (93 - (e.target.value - f) / 2));
-      setY3LeftShape(103 - (e.target.value - f) / 2);
-      console.log("y3LeftShape: " + (103 - (e.target.value - f) / 2));
-      setY4LeftShape(109 - (e.target.value - f) / 2);
-      console.log("y4LeftShape: " + (109 - (e.target.value - f) / 2));
-    } else {
-      setBLeftShape(f - e.target.value);
-      setY1LeftShape(88 + (f - e.target.value) / 2);
-      setY2LeftShape(93 + (f - e.target.value) / 2);
-      setY3LeftShape(103 + (f - e.target.value) / 2);
-      setY4LeftShape(109 + (f - e.target.value) / 2);
-    }
   };
   const handelOnChangeBeta = (e) => {
     setGrad(e.target.value);
   };
-  const initialBDistance = 346;
+  const handelIncB = () => {
+    setBDistance(bDistance + 5);
+    // setWidth(width + 5);
+    // setXCoordinateLeftShape(xCoordinateLeftShape - 2.5);
+    // setXCoordinateRightShape(xCoordinateRightShape + 2.5);
+  };
+  const handelDecB = () => {
+    setBDistance(bDistance - 5);
+    // setWidth(width - 5);
+    // setXCoordinateLeftShape(xCoordinateLeftShape + 2.5);
+    // setXCoordinateRightShape(xCoordinateRightShape - 2.5);
+  };
   const handelOnChangeBDistance = (e) => {
     setBDistance(() => Number(e.target.value));
-    console.log("typeof bDistance: " + typeof Number(bDistance) + bDistance);
-    if (e.target.value >= initialBDistance) {
-      setWidth(316 + (e.target.value - initialBDistance));
-      console.log("Width:" + (316 + (e.target.value - initialBDistance)));
-      setXCoordinateRightShape((e.target.value - initialBDistance) / 2);
-      setXCoordinateLeftShape(0 - (e.target.value - initialBDistance) / 2);
-    } else {
-      setWidth(316 - (initialBDistance - e.target.value));
-      setXCoordinateRightShape(0 - (initialBDistance - e.target.value) / 2);
-      setXCoordinateLeftShape((initialBDistance - e.target.value) / 2);
-    }
   };
-
+  const handelSelect = (e) => {
+    setType(e.target.value);
+  };
+  const handelShow = () => {
+    setShow((p) => !p);
+  };
   return (
     <>
+      <label>choose an unit </label>
+      <select value={type} onChange={handelSelect}>
+        <option value="centimeter">centimeter</option>
+        <option value="millimeter">millimeter</option>
+        <option value="pixel">pixel</option>
+        <option value="inch">inch</option>
+      </select>
       <button onClick={handelDecT2}> t2 -</button>
       <input type={"number"} onChange={handelOnChangeT2} value={t2} />
       <button onClick={handelIncT2}> t2 +</button>
@@ -170,6 +168,8 @@ export default function SteepFlankedSingleV() {
         value={bDistance}
       />
       <button onClick={handelIncB}> b + </button>
+      <button onClick={handelShow}>on/off </button>
+
       <Stage
         width={window.innerWidth}
         height={window.innerHeight}
@@ -178,6 +178,7 @@ export default function SteepFlankedSingleV() {
       >
         <Layer>
           <LeftShape
+            show={show}
             xCoordinateLeftShape={xCoordinateLeftShape}
             bLeftShape={bLeftShape}
             y4LeftShape={y4LeftShape}
@@ -187,6 +188,7 @@ export default function SteepFlankedSingleV() {
             initialXLeftShape={initialXLeftShape}
           />
           <RightShape
+            show={show}
             xCoordinateRightShape={xCoordinateRightShape}
             bRightShape={bRightShape}
             initialX={initialX}
@@ -198,25 +200,15 @@ export default function SteepFlankedSingleV() {
             xAdditionalLine={xAdditionalLine}
             initialXQuadratic={initialXQuadratic}
             yBetaSmallLine={yBetaSmallLine}
+            initialA={initialA}
           />
           <BottomShape
+            show={show}
             xCoordinateRightShape={xCoordinateRightShape}
             yBetaBigLine={yBetaBigLine}
             xCoordinateLeftShape={xCoordinateLeftShape}
-            bDistance={bDistance}
+            bDistance={bDistance * factor}
             width={width}
-          />
-          {/*additional line*/}
-          <Line
-            x={xCoordinateRightShape}
-            stroke={"green"}
-            strokeWidth={2}
-            points={[
-              initialX,
-              bRightShape,
-              xAdditionalLine,
-              yBetaSmallLine + initialA,
-            ]}
           />
         </Layer>
       </Stage>

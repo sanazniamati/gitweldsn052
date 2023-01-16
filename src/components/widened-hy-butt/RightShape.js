@@ -1,15 +1,15 @@
 import { Arrow, Group, Line, Shape, Text } from "react-konva";
-
+import { PropTypes } from "prop-types";
 function RightShape({
   xCoordinateRightShape,
-  r,
-  ySPRightShape,
   bRightShape,
   y1RightShape,
   y2RightShape,
   y3RightShape,
   y4RightShape,
+  ySPRightShape,
   yCPRightShape,
+  r,
   show,
 }) {
   return (
@@ -23,7 +23,6 @@ function RightShape({
           context.lineTo(147, ySPRightShape);
           context.arcTo(147, yCPRightShape, 305, bRightShape, r);
           context.lineTo(439, bRightShape);
-          //shekastegi
           context.lineTo(439, y1RightShape);
           context.lineTo(425, y2RightShape);
           context.lineTo(454, y3RightShape);
@@ -96,5 +95,16 @@ function RightShape({
     </Group>
   );
 }
-
+RightShape.propTypes = {
+  xCoordinateRightShape: PropTypes.number,
+  bRightShape: PropTypes.number,
+  y1RightShape: PropTypes.number,
+  y2RightShape: PropTypes.number,
+  y3RightShape: PropTypes.number,
+  y4RightShape: PropTypes.number,
+  yCPRightShape: PropTypes.number,
+  ySPRightShape: PropTypes.number,
+  r: PropTypes.number,
+  show: PropTypes.bool,
+};
 export default RightShape;

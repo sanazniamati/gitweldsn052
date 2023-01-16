@@ -1,5 +1,6 @@
 import React from "react";
 import { Arrow, Group, Line, Shape, Text } from "react-konva";
+import { PropTypes } from "prop-types";
 
 function RightShape({
   xCoordinateRightShape,
@@ -13,6 +14,8 @@ function RightShape({
   xAdditionalLine,
   yBetaSmallLine,
   initialXQuadratic,
+  initialA,
+  show,
 }) {
   return (
     <Group>
@@ -35,12 +38,14 @@ function RightShape({
         strokeWidth={3}
       />
       <Line
+        visible={show}
         x={xCoordinateRightShape}
         stroke={"green"}
         strokeWidth={3}
         points={[625, bRightShape, 723, bRightShape]}
       />
       <Arrow
+        visible={show}
         x={xCoordinateRightShape}
         points={[718, bRightShape + 3, 718, 196 - 3]}
         pointerLength={5}
@@ -50,12 +55,14 @@ function RightShape({
         strokeWidth={3}
       />
       <Line
+        visible={show}
         x={xCoordinateRightShape}
         stroke={"green"}
         strokeWidth={3}
         points={[625, 196, 723, 196]}
       />
       <Text
+        visible={show}
         x={xCoordinateRightShape + 736}
         y={y1RightShape}
         text={"t1"}
@@ -63,6 +70,7 @@ function RightShape({
       />
       {/*    beta */}
       <Shape
+        visible={show}
         x={xCoordinateRightShape}
         sceneFunc={(context, shape) => {
           context.beginPath();
@@ -79,6 +87,7 @@ function RightShape({
         strokeWidth={3}
       />
       <Arrow
+        visible={show}
         x={xCoordinateRightShape}
         points={[336, yBetaBigLine + 5, 346, yBetaBigLine]}
         pointerLength={5}
@@ -87,6 +96,7 @@ function RightShape({
         strokeWidth={3}
       />
       <Arrow
+        visible={show}
         x={xCoordinateRightShape}
         points={[
           xAdditionalLine + 2,
@@ -102,13 +112,42 @@ function RightShape({
         strokeWidth={3}
       />
       <Text
+        visible={show}
         x={xCoordinateRightShape + initialX - 25}
         y={yBetaBigLine - 55}
         text={"β"}
         fontSize={35}
       />
+      {/*additional line*/}
+      <Line
+        visible={show}
+        x={xCoordinateRightShape}
+        stroke={"green"}
+        strokeWidth={3}
+        points={[
+          initialX,
+          bRightShape,
+          xAdditionalLine,
+          yBetaSmallLine + initialA,
+        ]}
+      />
     </Group>
   );
 }
+RightShape.prototype = {
+  xCoordinateRightShape: PropTypes.number.isRequired,
+  bRightShape: PropTypes.number.isRequired,
+  initialX: PropTypes.number.isRequired,
+  y4RightShape: PropTypes.number.isRequired,
+  y3RightShape: PropTypes.number.isRequired,
+  y1RightShape: PropTypes.number.isRequired,
+  y2RightShape: PropTypes.number.isRequired,
+  yBetaBigLine: PropTypes.number.isRequired,
+  xAdditionalLine: PropTypes.number.isRequired,
+  yBetaSmallLine: PropTypes.number.isRequired,
+  initialXQuadratic: PropTypes.number.isRequired,
+  initialA: PropTypes.number.isRequired,
+  show: PropTypes.bool.isRequired,
+};
 
 export default RightShape;
