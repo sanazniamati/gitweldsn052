@@ -18,3 +18,14 @@ test("add btn t2- correctly works", () => {
   fireEvent.click(decT2);
   expect(inputT2.textContent).toBe(109);
 });
+test("change inputT2 works correctly", () => {
+  const { getElementById } = render(<HyButt />);
+  const inputT2 = getElementById("input-t2");
+  expect(inputT2.value).toBe("114");
+  fireEvent.change(inputT2, {
+    target: {
+      value: "120",
+    },
+  });
+  expect(inputT2.value).toBe("120");
+});
