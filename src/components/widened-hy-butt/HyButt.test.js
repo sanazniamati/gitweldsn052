@@ -29,3 +29,17 @@ test("change inputT2 works correctly", () => {
   });
   expect(inputT2.value).toBe("120");
 });
+test("changing input-T2 value then clicking on decT2 works correctly", () => {
+  const { getElementById } = render(<HyButt />);
+  const decT2 = getElementById("btn-dec-t2");
+  const inputT2 = getElementById("input-t2");
+  expect(inputT2.value).toBe("114");
+  fireEvent.change(inputT2, {
+    target: {
+      value: "120",
+    },
+  });
+  expect(inputT2.value).toBe("120");
+  fireEvent.click(decT2);
+  expect(inputT2.value).toBe("125");
+});
