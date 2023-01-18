@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function Home() {
   return (
     <>
-      <Link to="/HY_Butt">
+      <Link to="/HyButt">
         <img width="570px" src={HY} alt={"widened-hy-butt"} />
       </Link>
       <Link to="/SteepFlankedSingleV">

@@ -4,7 +4,7 @@ import LeftShape from "./LeftShape";
 import BottomShape from "./BottomShape";
 import RightShape from "./RightShape";
 
-export default function HY_Butt() {
+export default function HyButt() {
   const [show, setShow] = useState(true);
   //Right shape
   const [bRightShape, setBRightShape] = useState(196);
