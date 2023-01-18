@@ -165,9 +165,18 @@ export default function HY_Butt() {
         <option value="pixel">pixel</option>
         <option value="inch">inch</option>
       </select>
-      <button onClick={handelDecT2}> t2 -</button>
-      <input type={"number"} onChange={handelOnChangeT2} value={t2} />
-      <button onClick={handelIncT2}> t2 +</button>
+      <button testid={"btn-dec-t2"} onClick={handelDecT2}>
+        t2 -
+      </button>
+      <input
+        testid={"input-t2"}
+        type={"number"}
+        onChange={handelOnChangeT2}
+        value={t2}
+      />
+      <button testid={"btn-inc-t2"} onClick={handelIncT2}>
+        t2 +
+      </button>
       <button onClick={handelDecT1}>t1 -</button>
       <input type={"number"} onChange={handelOnChangeT1} value={t1} />
       <button onClick={handelIncT1}>t1 +</button>
