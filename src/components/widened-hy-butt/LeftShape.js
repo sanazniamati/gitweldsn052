@@ -1,6 +1,9 @@
 import React from "react";
 import { Arrow, Group, Line, Shape, Text } from "react-konva";
 import { PropTypes } from "prop-types";
+import "konva/lib/shapes/Line";
+import "konva/lib/shapes/Text";
+import "konva/lib/shapes/Arrow";
 function LeftShape({
   xCoordinateLeftShape,
   aLeftShape,

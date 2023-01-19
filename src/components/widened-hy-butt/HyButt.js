@@ -72,8 +72,8 @@ export default function HyButt() {
     if (t2 >= 114) {
       setALeftShape(114 + (t2 * factor - 114));
       setBDistance(initialBDistance - (t2 * factor - 114));
-      console.log("T2 initialBDistance: " + initialBDistance);
-      console.log("T2 bDistance" + bDistance);
+     // console.log("T2 initialBDistance: " + initialBDistance);
+     // console.log("T2 bDistance" + bDistance);
       // setBDistance(bDistance - (t2 * factor - 114));
       setX1LeftShape(51 + (t2 * factor - 114) / 2);
       setX2LeftShape(55 + (t2 * factor - 114) / 2);
@@ -157,7 +157,7 @@ export default function HyButt() {
     setShow((p) => !p);
   };
   return (
-    <>
+    <div>
       <label>choose an unit </label>
       <select value={type} onChange={handelSelect}>
         <option value="centimeter">centimeter</option>
@@ -165,16 +165,16 @@ export default function HyButt() {
         <option value="pixel">pixel</option>
         <option value="inch">inch</option>
       </select>
-      <button testid={"btn-dec-t2"} onClick={handelDecT2}>
+      <button data-testid={"btn-dec-t2"} onClick={handelDecT2}>
         t2 -
       </button>
       <input
-        testid={"input-t2"}
+        data-testid={"input-t2"}
         type={"number"}
         onChange={handelOnChangeT2}
         value={t2}
       />
-      <button testid={"btn-inc-t2"} onClick={handelIncT2}>
+      <button data-testid={"btn-inc-t2"} onClick={handelIncT2}>
         t2 +
       </button>
       <button onClick={handelDecT1}>t1 -</button>
@@ -199,6 +199,7 @@ export default function HyButt() {
         style={{ background: "lightgray" }}
       >
         <Layer>
+
           <LeftShape
             show={show}
             xCoordinateLeftShape={xCoordinateLeftShape}
@@ -230,6 +231,6 @@ export default function HyButt() {
           />
         </Layer>
       </Stage>
-    </>
+    </div>
   );
 }
