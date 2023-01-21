@@ -1,11 +1,18 @@
 import { Stage, Layer } from "react-konva";
+import { PropTypes } from "prop-types";
 import { useState, useEffect } from "react";
 import LeftShape from "./LeftShape";
 import RightShape from "./RightShape";
 import BottomShape from "./BottomShape";
+
 export default function SteepFlankedSingleV() {
   const [showDetails, setShowDetails] = useState(true);
   const [showRect, setShowRect] = useState(true);
+  const marginX = 0;
+  const marginY = 0;
+  // marginX and marginY set for leftShape
+  const marginXStage = 150;
+  const marginYStage = 200;
 
   //choose unit
   // 1cm --> 37.8 pixel
@@ -122,7 +129,7 @@ export default function SteepFlankedSingleV() {
     setT2(e.target.value);
   };
   const handelOnChangeBeta = (e) => {
-    setGrad(e.target.value);
+    setGrad(parseInt(e.target.value));
   };
   const handelIncB = () => {
     setBDistance(bDistance + 5);
@@ -181,9 +188,13 @@ export default function SteepFlankedSingleV() {
         height={window.innerHeight}
         style={{ background: "lightgray" }}
         draggable={true}
+        x={marginXStage}
+        y={marginYStage}
       >
         <Layer>
           <LeftShape
+            marginX={marginX}
+            marginY={marginY}
             showDetails={showDetails}
             xCoordinateLeftShape={xCoordinateLeftShape}
             bLeftShape={bLeftShape}
@@ -222,3 +233,51 @@ export default function SteepFlankedSingleV() {
     </>
   );
 }
+SteepFlankedSingleV.propTypes = {
+  showDetails: PropTypes.bool,
+  showRect: PropTypes.bool,
+  factor: PropTypes.number,
+  f: PropTypes.number,
+  type: PropTypes.string,
+  grade: PropTypes.number,
+  bLeftShape: PropTypes.number,
+  y1LeftShape: PropTypes.number,
+  y2LeftShape: PropTypes.number,
+  y3LeftShape: PropTypes.number,
+  y4LeftShape: PropTypes.number,
+  t2: PropTypes.number,
+  initialXLeftShape: PropTypes.number,
+  bRightShape: PropTypes.number,
+  y1RightShape: PropTypes.number,
+  y2RightShape: PropTypes.number,
+  y3RightShape: PropTypes.number,
+  y4RightShape: PropTypes.number,
+  yBetaSmallLine: PropTypes.number,
+  yBetaBigLine: PropTypes.number,
+  t1: PropTypes.number,
+  initialX: PropTypes.number,
+  xAdditionalLine: PropTypes.number,
+  initialA: PropTypes.number,
+  xCoordinateLeftShape: PropTypes.number,
+  xCoordinateRightShape: PropTypes.number,
+  bDistance: PropTypes.number,
+  width: PropTypes.number,
+  initialXQuadratic: PropTypes.number,
+};
+SteepFlankedSingleV.defaultProps = {
+  showDetails: true,
+  showRect: true,
+  type: "pixel",
+  factor: 1,
+  f: 196,
+  grade: 15,
+  bLeftShape: 0,
+  y1LeftShape: 88,
+  y2LeftShape: 93,
+  y3LeftShape: 103,
+  y4LeftShape: 109,
+  yBetaSmallLine: -78,
+  yBetaBigLine: -81,
+  t2: 196,
+  bDistance: 73,
+};
