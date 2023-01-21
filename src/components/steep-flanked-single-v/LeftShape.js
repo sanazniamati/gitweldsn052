@@ -10,8 +10,6 @@ function LeftShape({
   y2LeftShape,
   y1LeftShape,
   showDetails,
-  marginX,
-  // marginY,
 }) {
   return (
     <Group>
@@ -20,13 +18,13 @@ function LeftShape({
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
-        points={[-95 + marginX, bLeftShape, marginX, bLeftShape]}
+        points={[-95, bLeftShape, 0, bLeftShape]}
         dash={[10, 5]}
       />
       <Arrow
         visible={showDetails}
         x={xCoordinateLeftShape}
-        points={[-95 + marginX, bLeftShape + 3, -95 + marginX, 196 - 3]}
+        points={[-95, bLeftShape + 3, -95, 196 - 3]}
         pointerLength={5}
         pointerWidth={5}
         pointerAtBeginning={true}
@@ -38,12 +36,12 @@ function LeftShape({
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
-        points={[-95 + marginX, 196, marginX, 196]}
+        points={[-95, 196, 0, 196]}
         dash={[10, 5]}
       />
       <Text
         visible={showDetails}
-        x={xCoordinateLeftShape - 135 + marginX}
+        x={xCoordinateLeftShape - 135}
         y={y1LeftShape - 10}
         text={"t2"}
         fontSize={30}
@@ -53,14 +51,14 @@ function LeftShape({
         x={xCoordinateLeftShape}
         sceneFunc={(context, shape) => {
           context.beginPath();
-          context.moveTo(marginX, bLeftShape);
-          context.lineTo(marginX + initialXLeftShape, bLeftShape);
-          context.lineTo(277 + marginX, 196);
-          context.lineTo(marginX, 196);
-          context.lineTo(marginX, y4LeftShape);
-          context.lineTo(19 + marginX, y3LeftShape);
-          context.lineTo(-18 + marginX, y2LeftShape);
-          context.lineTo(marginX, y1LeftShape);
+          context.moveTo(0, bLeftShape);
+          context.lineTo(initialXLeftShape, bLeftShape);
+          context.lineTo(277, 196);
+          context.lineTo(0, 196);
+          context.lineTo(0, y4LeftShape);
+          context.lineTo(19, y3LeftShape);
+          context.lineTo(-18, y2LeftShape);
+          context.lineTo(0, y1LeftShape);
           context.closePath();
           context.fillStrokeShape(shape);
         }}

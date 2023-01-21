@@ -9,6 +9,16 @@ export default function HyButt() {
   const [showDetails, setShowDetails] = useState(true);
   const marginXStage = 150;
   const marginYStage = 50;
+  const [position, setPosition] = useState({
+    x: marginXStage,
+    y: marginYStage,
+  });
+  const handelDragEnd = (e) => {
+    setPosition({
+      x: e.target.x(),
+      y: e.target.y(),
+    });
+  };
   //Right shape
   const [bRightShape, setBRightShape] = useState(196);
   const [t1, setT1] = useState(347 - 196);
@@ -86,7 +96,6 @@ export default function HyButt() {
       setX3LeftShape(61 - (114 - t2 * factor) / 2);
       setX4LeftShape(64 - (114 - t2 * factor) / 2);
     }
-
     setR(r);
   }, [type, factor, t1, t2, r, aLeftShape]);
   const handelOnChangeBDistance = (e) => {
@@ -196,8 +205,9 @@ export default function HyButt() {
         height={window.innerHeight}
         draggable={true}
         style={{ background: "lightgray" }}
-        x={marginXStage}
-        y={marginYStage}
+        x={position.x}
+        y={position.y}
+        onDragEnd={handelDragEnd}
       >
         <Layer>
           <LeftShape

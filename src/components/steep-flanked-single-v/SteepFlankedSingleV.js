@@ -8,11 +8,18 @@ import BottomShape from "./BottomShape";
 export default function SteepFlankedSingleV() {
   const [showDetails, setShowDetails] = useState(true);
   const [showRect, setShowRect] = useState(true);
-  const marginX = 0;
-  const marginY = 0;
-  // marginX and marginY set for leftShape
   const marginXStage = 150;
-  const marginYStage = 200;
+  const marginYStage = 50;
+  const [position, setPosition] = useState({
+    x: marginXStage,
+    y: marginYStage,
+  });
+  const handelDragEnd = (e) => {
+    setPosition({
+      x: e.target.x(),
+      y: e.target.y(),
+    });
+  };
 
   //choose unit
   // 1cm --> 37.8 pixel
@@ -188,13 +195,12 @@ export default function SteepFlankedSingleV() {
         height={window.innerHeight}
         style={{ background: "lightgray" }}
         draggable={true}
-        x={marginXStage}
-        y={marginYStage}
+        x={position.x}
+        y={position.y}
+        onDragEnd={handelDragEnd}
       >
         <Layer>
           <LeftShape
-            marginX={marginX}
-            marginY={marginY}
             showDetails={showDetails}
             xCoordinateLeftShape={xCoordinateLeftShape}
             bLeftShape={bLeftShape}
