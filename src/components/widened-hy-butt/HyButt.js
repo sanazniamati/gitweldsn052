@@ -1,4 +1,5 @@
 import { Stage, Layer } from "react-konva";
+import { PropTypes } from "prop-types";
 import { useEffect, useState } from "react";
 import LeftShape from "./LeftShape";
 import BottomShape from "./BottomShape";
@@ -7,11 +8,10 @@ import RightShape from "./RightShape";
 export default function HyButt() {
   const [showDetails, setShowDetails] = useState(true);
   const marginXStage = 150;
-  const marginYStage = 150;
+  const marginYStage = 50;
   //Right shape
   const [bRightShape, setBRightShape] = useState(196);
-  let initialStateT1 = 347 - bRightShape;
-  const [t1, setT1] = useState(initialStateT1);
+  const [t1, setT1] = useState(347 - 196);
   const [y1RightShape, setY1RightShape] = useState(261);
   const [y2RightShape, setY2RightShape] = useState(265);
   const [y3RightShape, setY3RightShape] = useState(273);
@@ -21,7 +21,6 @@ export default function HyButt() {
   const [yCPRightShape, setYCPRightShape] = useState(207);
   //left shape
   const [aLeftShape, setALeftShape] = useState(114);
-  // const [aRightShape, setARightShape] = useState(147);
   const [t2, setT2] = useState(114);
   const [x1LeftShape, setX1LeftShape] = useState(52);
   const [x2LeftShape, setX2LeftShape] = useState(55);
@@ -52,7 +51,7 @@ export default function HyButt() {
   }
   //347-bRightShape=151 --> initialStateT1
   //aLeftShape-0=114 --> initialStateT2
-  let initialBDistance = 33;
+  // let initialBDistance = 33;
   useEffect(() => {
     if (t1 >= 151) {
       setBRightShape(196 - (t1 * factor - 151));
@@ -73,17 +72,14 @@ export default function HyButt() {
     }
     if (t2 >= 114) {
       setALeftShape(114 + (t2 * factor - 114));
-      setBDistance(initialBDistance - (t2 * factor - 114));
-      // console.log("T2 initialBDistance: " + initialBDistance);
-      // console.log("T2 bDistance" + bDistance);
-      // setBDistance(bDistance - (t2 * factor - 114));
       setX1LeftShape(51 + (t2 * factor - 114) / 2);
       setX2LeftShape(55 + (t2 * factor - 114) / 2);
       setX3LeftShape(61 + (t2 * factor - 114) / 2);
       setX4LeftShape(64 + (t2 * factor - 114) / 2);
+      setBDistance(33 - (t2 * factor - 114));
     } else {
       setALeftShape(114 - (114 - t2 * factor));
-      setBDistance(initialBDistance + (114 - t2 * factor));
+      setBDistance(33 + (114 - t2 * factor));
       // setBDistance(bDistance + (114 - t2 * factor));
       setX1LeftShape(51 - (114 - t2 * factor) / 2);
       setX2LeftShape(55 - (114 - t2 * factor) / 2);
@@ -92,12 +88,9 @@ export default function HyButt() {
     }
 
     setR(r);
-  }, [type, factor, t1, t2, r, aLeftShape, initialBDistance]);
+  }, [type, factor, t1, t2, r, aLeftShape]);
   const handelOnChangeBDistance = (e) => {
-    initialBDistance = e.target.value;
-    setBDistance(initialBDistance);
-    console.log("initialBDistance: " + initialBDistance);
-    console.log("BDistance: " + bDistance);
+    setBDistance(parseInt(e.target.value));
     if (e.target.value >= 33) {
       setXCoordinateRightShape((e.target.value - 33) / 2);
       setXCoordinateLeftShape(0 - (e.target.value - 33) / 2);
@@ -126,17 +119,21 @@ export default function HyButt() {
     setT1(t1 - 5);
   };
   const handelOnChangeT1 = (e) => {
-    if (e.target.value > 0) {
-      setT1(e.target.value);
+    if (parseInt(e.target.value) > 0) {
+      setT1(parseInt(e.target.value));
     } else {
       console.log("Error: input value for t1 ");
     }
   };
   const handelIncB = () => {
     setBDistance(bDistance + 5);
+    setXCoordinateRightShape(xCoordinateRightShape + 5 / 2);
+    setXCoordinateLeftShape(xCoordinateLeftShape - 5 / 2);
   };
   const handelDecB = () => {
     setBDistance(bDistance - 5);
+    setXCoordinateRightShape(xCoordinateRightShape - 5 / 2);
+    setXCoordinateLeftShape(xCoordinateLeftShape + 5 / 2);
   };
 
   const handelIncR = () => {
@@ -237,3 +234,8 @@ export default function HyButt() {
     </div>
   );
 }
+HyButt.propTypes = {
+  showDetails: PropTypes.bool,
+  marginXStage: PropTypes.number,
+  marginYStage: PropTypes.number,
+};
