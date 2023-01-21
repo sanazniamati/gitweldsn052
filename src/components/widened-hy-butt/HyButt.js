@@ -6,6 +6,8 @@ import RightShape from "./RightShape";
 
 export default function HyButt() {
   const [showDetails, setShowDetails] = useState(true);
+  const marginXStage = 150;
+  const marginYStage = 150;
   //Right shape
   const [bRightShape, setBRightShape] = useState(196);
   let initialStateT1 = 347 - bRightShape;
@@ -197,6 +199,8 @@ export default function HyButt() {
         height={window.innerHeight}
         draggable={true}
         style={{ background: "lightgray" }}
+        x={marginXStage}
+        y={marginYStage}
       >
         <Layer>
           <LeftShape
