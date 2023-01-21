@@ -1,11 +1,7 @@
 import HyButt from "./HyButt";
-import {fireEvent, render, screen} from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import "@testing-library/jest-dom/extend-expect";
-
-
-
 test("add btn t2+ correctly works", () => {
-  //const { getByTestId } = render(<HyButt />);
   const { getByTestId } = render(<HyButt />);
   // const incT2 = getByTestId("btn-inc-t2");
   // eslint-disable-next-line testing-library/prefer-screen-queries

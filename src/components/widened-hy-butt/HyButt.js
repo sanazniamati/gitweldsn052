@@ -5,7 +5,7 @@ import BottomShape from "./BottomShape";
 import RightShape from "./RightShape";
 
 export default function HyButt() {
-  const [show, setShow] = useState(true);
+  const [showDetails, setShowDetails] = useState(true);
   //Right shape
   const [bRightShape, setBRightShape] = useState(196);
   let initialStateT1 = 347 - bRightShape;
@@ -72,8 +72,8 @@ export default function HyButt() {
     if (t2 >= 114) {
       setALeftShape(114 + (t2 * factor - 114));
       setBDistance(initialBDistance - (t2 * factor - 114));
-     // console.log("T2 initialBDistance: " + initialBDistance);
-     // console.log("T2 bDistance" + bDistance);
+      // console.log("T2 initialBDistance: " + initialBDistance);
+      // console.log("T2 bDistance" + bDistance);
       // setBDistance(bDistance - (t2 * factor - 114));
       setX1LeftShape(51 + (t2 * factor - 114) / 2);
       setX2LeftShape(55 + (t2 * factor - 114) / 2);
@@ -90,7 +90,7 @@ export default function HyButt() {
     }
 
     setR(r);
-  }, [type, factor, t1, t2, r, aLeftShape]);
+  }, [type, factor, t1, t2, r, aLeftShape, initialBDistance]);
   const handelOnChangeBDistance = (e) => {
     initialBDistance = e.target.value;
     setBDistance(initialBDistance);
@@ -153,8 +153,8 @@ export default function HyButt() {
   const handelSelect = (e) => {
     setType(e.target.value);
   };
-  const handelShow = () => {
-    setShow((p) => !p);
+  const handelShowDetails = () => {
+    setShowDetails((p) => !p);
   };
   return (
     <div>
@@ -190,7 +190,7 @@ export default function HyButt() {
       <button onClick={handelDecR}> R - </button>
       <input type={"number"} onChange={handelOnChangeR} value={r} />
       <button onClick={handelIncR}>R + </button>
-      <button onClick={handelShow}>on/off </button>
+      <button onClick={handelShowDetails}>on/off </button>
 
       <Stage
         width={window.innerWidth}
@@ -199,9 +199,8 @@ export default function HyButt() {
         style={{ background: "lightgray" }}
       >
         <Layer>
-
           <LeftShape
-            show={show}
+            showDetails={showDetails}
             xCoordinateLeftShape={xCoordinateLeftShape}
             aLeftShape={aLeftShape}
             x1LeftShape={x1LeftShape}
@@ -210,7 +209,7 @@ export default function HyButt() {
             x4LeftShape={x4LeftShape}
           />
           <BottomShape
-            show={show}
+            showDetails={showDetails}
             xCoordinateRightShape={xCoordinateRightShape}
             xCoordinateLeftShape={xCoordinateLeftShape}
             bDistance={bDistance * factor}
@@ -218,7 +217,7 @@ export default function HyButt() {
             t2={t2}
           />
           <RightShape
-            show={show}
+            showDetails={showDetails}
             xCoordinateRightShape={xCoordinateRightShape}
             r={r * factor}
             yCPRightShape={yCPRightShape}

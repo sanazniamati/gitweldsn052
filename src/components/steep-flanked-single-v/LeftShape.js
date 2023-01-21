@@ -9,19 +9,20 @@ function LeftShape({
   y3LeftShape,
   y2LeftShape,
   y1LeftShape,
-  show,
+  showDetails,
 }) {
   return (
     <Group>
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
         points={[-95, bLeftShape, 0, bLeftShape]}
+        dash={[10, 5]}
       />
       <Arrow
-        visible={show}
+        visible={showDetails}
         x={xCoordinateLeftShape}
         points={[-95, bLeftShape + 3, -95, 196 - 3]}
         pointerLength={5}
@@ -31,14 +32,15 @@ function LeftShape({
         strokeWidth={3}
       />
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
         points={[-95, 196, 0, 196]}
+        dash={[10, 5]}
       />
       <Text
-        visible={show}
+        visible={showDetails}
         x={xCoordinateLeftShape - 135}
         y={y1LeftShape - 10}
         text={"t2"}

@@ -10,7 +10,7 @@ function RightShape({
   ySPRightShape,
   yCPRightShape,
   r,
-  show,
+  showDetails,
 }) {
   return (
     <Group>
@@ -42,21 +42,22 @@ function RightShape({
         strokeWidth={3}
       />
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
         strokeWidth={3}
         points={[439, bRightShape, 498, bRightShape]}
+        dash={[10, 5]}
       />
       <Text
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape + 510}
         y={y2RightShape}
         text={"t1"}
         fontSize={30}
       />
       <Arrow
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         points={[498, bRightShape + 3, 498, 347 - 3]}
         pointerLength={5}
@@ -67,15 +68,16 @@ function RightShape({
         strokeWidth={3}
       />
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
         strokeWidth={3}
         points={[817 - 378, 347, 876 - 378, 347]}
+        dash={[10, 5]}
       />
       {/*    R */}
       <Text
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape + 555 - 378}
         y={yCPRightShape - 137}
         text={"R"}
@@ -83,7 +85,7 @@ function RightShape({
       />
 
       <Arrow
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         points={[188, yCPRightShape - 107, 188, ySPRightShape - 185]}
         pointerLength={5}

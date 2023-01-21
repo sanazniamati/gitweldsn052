@@ -15,7 +15,7 @@ function RightShape({
   yBetaSmallLine,
   initialXQuadratic,
   initialA,
-  show,
+  showDetails,
 }) {
   return (
     <Group>
@@ -38,14 +38,15 @@ function RightShape({
         strokeWidth={3}
       />
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
         strokeWidth={3}
         points={[625, bRightShape, 723, bRightShape]}
+        dash={[10, 5]}
       />
       <Arrow
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         points={[718, bRightShape + 3, 718, 196 - 3]}
         pointerLength={5}
@@ -55,14 +56,15 @@ function RightShape({
         strokeWidth={3}
       />
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
         strokeWidth={3}
         points={[625, 196, 723, 196]}
+        dash={[10, 5]}
       />
       <Text
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape + 736}
         y={y1RightShape}
         text={"t1"}
@@ -70,7 +72,7 @@ function RightShape({
       />
       {/*    beta */}
       <Shape
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         sceneFunc={(context, shape) => {
           context.beginPath();
@@ -87,7 +89,7 @@ function RightShape({
         strokeWidth={3}
       />
       <Arrow
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         points={[336, yBetaBigLine + 5, 346, yBetaBigLine]}
         pointerLength={5}
@@ -96,7 +98,7 @@ function RightShape({
         strokeWidth={3}
       />
       <Arrow
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         points={[
           xAdditionalLine + 2,
@@ -112,7 +114,7 @@ function RightShape({
         strokeWidth={3}
       />
       <Text
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape + initialX - 25}
         y={yBetaBigLine - 55}
         text={"β"}
@@ -120,7 +122,7 @@ function RightShape({
       />
       {/*additional line*/}
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
         strokeWidth={3}
@@ -130,6 +132,7 @@ function RightShape({
           xAdditionalLine,
           yBetaSmallLine + initialA,
         ]}
+        dash={[10, 5]}
       />
     </Group>
   );

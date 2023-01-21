@@ -6,26 +6,27 @@ function BottomShape({
   xCoordinateRightShape,
   bDistance,
   aLeftShape,
-  show,
+  showDetails,
 }) {
   return (
     <Group>
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
         points={[aLeftShape, 539, aLeftShape, 606]}
+        dash={[10, 5]}
       />
       <Text
-        visible={show}
+        visible={showDetails}
         x={aLeftShape + bDistance / 2}
         y={626}
         text={"b"}
         fontSize={30}
       />
       <Arrow
-        visible={show}
+        visible={showDetails}
         x={xCoordinateLeftShape}
         points={[aLeftShape + 3, 606, bDistance + aLeftShape - 3, 606]}
         pointerLength={5}
@@ -36,11 +37,12 @@ function BottomShape({
         strokeWidth={3}
       />
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
         strokeWidth={3}
         points={[147, 539, 147, 606]}
+        dash={[10, 5]}
       />
     </Group>
   );

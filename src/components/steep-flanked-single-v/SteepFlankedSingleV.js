@@ -4,7 +4,9 @@ import LeftShape from "./LeftShape";
 import RightShape from "./RightShape";
 import BottomShape from "./BottomShape";
 export default function SteepFlankedSingleV() {
-  const [show, setShow] = useState(true);
+  const [showDetails, setShowDetails] = useState(true);
+  const [showRect, setShowRect] = useState(true);
+
   //choose unit
   // 1cm --> 37.8 pixel
   // 1mm --> 3.78 pixel
@@ -140,8 +142,11 @@ export default function SteepFlankedSingleV() {
   const handelSelect = (e) => {
     setType(e.target.value);
   };
-  const handelShow = () => {
-    setShow((p) => !p);
+  const handelShowDetails = () => {
+    setShowDetails((p) => !p);
+  };
+  const handelShowRect = () => {
+    setShowRect((prevState) => !prevState);
   };
   return (
     <>
@@ -168,7 +173,8 @@ export default function SteepFlankedSingleV() {
         value={bDistance}
       />
       <button onClick={handelIncB}> b + </button>
-      <button onClick={handelShow}>on/off </button>
+      <button onClick={handelShowDetails}>on/off </button>
+      <button onClick={handelShowRect}>show Rect / hide Rect </button>
 
       <Stage
         width={window.innerWidth}
@@ -178,7 +184,7 @@ export default function SteepFlankedSingleV() {
       >
         <Layer>
           <LeftShape
-            show={show}
+            showDetails={showDetails}
             xCoordinateLeftShape={xCoordinateLeftShape}
             bLeftShape={bLeftShape}
             y4LeftShape={y4LeftShape}
@@ -188,7 +194,7 @@ export default function SteepFlankedSingleV() {
             initialXLeftShape={initialXLeftShape}
           />
           <RightShape
-            show={show}
+            showDetails={showDetails}
             xCoordinateRightShape={xCoordinateRightShape}
             bRightShape={bRightShape}
             initialX={initialX}
@@ -203,12 +209,13 @@ export default function SteepFlankedSingleV() {
             initialA={initialA}
           />
           <BottomShape
-            show={show}
+            showDetails={showDetails}
             xCoordinateRightShape={xCoordinateRightShape}
             yBetaBigLine={yBetaBigLine}
             xCoordinateLeftShape={xCoordinateLeftShape}
             bDistance={bDistance * factor}
             width={width}
+            showRect={showRect}
           />
         </Layer>
       </Stage>

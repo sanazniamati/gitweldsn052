@@ -10,28 +10,31 @@ function BottomShape({
   xCoordinateLeftShape,
   bDistance,
   width,
-  show,
+  showDetails,
+  showRect,
 }) {
   const [image] = useImage(rect);
   return (
     <Group>
       {/*  b */}
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
         strokeWidth={3}
         points={[350, yBetaBigLine, 350, 325]}
+        dash={[10, 5]}
       />
       <Line
-        visible={show}
+        visible={showDetails}
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
         points={[277, 194, 277, 325]}
+        dash={[10, 5]}
       />
       <Arrow
-        visible={show}
+        visible={showDetails}
         x={xCoordinateLeftShape}
         points={[280, 321, bDistance + 277 - 3, 321]}
         pointerLength={5}
@@ -41,7 +44,7 @@ function BottomShape({
         strokeWidth={3}
       />
       <Text
-        visible={show}
+        visible={showDetails}
         x={555 - 250}
         y={555 - 229}
         text={"b"}
@@ -56,6 +59,7 @@ function BottomShape({
         stroke={"blue"}
         strokeWidth={3}
         fillPatternImage={image}
+        visible={showRect}
       />
     </Group>
   );
