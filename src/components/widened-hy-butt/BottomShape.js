@@ -13,7 +13,7 @@ function BottomShape({
         visible={showDetails}
         x={xCoordinateLeftShape}
         stroke={"green"}
-        strokeWidth={3}
+        strokeWidth={1.5}
         points={[114, 539, 114, 606]}
         dash={[10, 5]}
       />
@@ -39,7 +39,7 @@ function BottomShape({
         visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
-        strokeWidth={3}
+        strokeWidth={1.5}
         points={[147, 539, 147, 606]}
         dash={[10, 5]}
       />

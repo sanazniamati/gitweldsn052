@@ -93,17 +93,17 @@ export default function HyButt() {
       setX3LeftShape(61 + (114 - t2 * factor) / 2);
       setX4LeftShape(64 + (114 - t2 * factor) / 2);
     }
+    if (bDistance >= 33) {
+      setXCoordinateRightShape((bDistance - 33) / 2);
+      setXCoordinateLeftShape(0 - (bDistance - 33) / 2);
+    } else {
+      setXCoordinateRightShape(0 - (33 - bDistance) / 2);
+      setXCoordinateLeftShape((33 - bDistance) / 2);
+    }
     setR(r);
-  }, [type, factor, t1, t2, r]);
+  }, [type, factor, t1, t2, r, bDistance]);
   const handelOnChangeBDistance = (e) => {
     setBDistance(parseInt(e.target.value));
-    if (e.target.value >= 33) {
-      setXCoordinateRightShape((e.target.value - 33) / 2);
-      setXCoordinateLeftShape(0 - (e.target.value - 33) / 2);
-    } else {
-      setXCoordinateRightShape(0 - (33 - e.target.value) / 2);
-      setXCoordinateLeftShape((33 - e.target.value) / 2);
-    }
   };
   const handelIncT2 = () => {
     setT2(Number(t2) + 5);

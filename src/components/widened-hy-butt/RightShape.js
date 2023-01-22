@@ -45,7 +45,7 @@ function RightShape({
         visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
-        strokeWidth={3}
+        strokeWidth={1.5}
         points={[439, bRightShape, 498, bRightShape]}
         dash={[10, 5]}
       />
@@ -71,7 +71,7 @@ function RightShape({
         visible={showDetails}
         x={xCoordinateRightShape}
         stroke={"green"}
-        strokeWidth={3}
+        strokeWidth={1.5}
         points={[817 - 378, 347, 876 - 378, 347]}
         dash={[10, 5]}
       />

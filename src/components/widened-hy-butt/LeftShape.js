@@ -19,7 +19,7 @@ function LeftShape({
         visible={showDetails}
         x={xCoordinateLeftShape}
         stroke={"green"}
-        strokeWidth={3}
+        strokeWidth={1.5}
         points={[startPointLeftShape, -56, startPointLeftShape, 0]}
         dash={[10, 5]}
       />
@@ -45,7 +45,7 @@ function LeftShape({
         visible={showDetails}
         x={xCoordinateLeftShape}
         stroke={"green"}
-        strokeWidth={3}
+        strokeWidth={1.5}
         points={[114, -56, 114, 0]}
         dash={[10, 5]}
       />
