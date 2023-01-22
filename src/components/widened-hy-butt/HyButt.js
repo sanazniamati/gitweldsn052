@@ -30,7 +30,7 @@ export default function HyButt() {
   const [ySPRightShape, setYSPRightShape] = useState(410);
   const [yCPRightShape, setYCPRightShape] = useState(207);
   //left shape
-  const [aLeftShape, setALeftShape] = useState(114);
+  const [startPointLeftShape, setStartPointLeftShape] = useState(0);
   const [t2, setT2] = useState(114);
   const [x1LeftShape, setX1LeftShape] = useState(52);
   const [x2LeftShape, setX2LeftShape] = useState(55);
@@ -81,23 +81,20 @@ export default function HyButt() {
       setYSPRightShape(410 + (151 - t1 * factor));
     }
     if (t2 >= 114) {
-      setALeftShape(114 + (t2 * factor - 114));
-      setX1LeftShape(51 + (t2 * factor - 114) / 2);
-      setX2LeftShape(55 + (t2 * factor - 114) / 2);
-      setX3LeftShape(61 + (t2 * factor - 114) / 2);
-      setX4LeftShape(64 + (t2 * factor - 114) / 2);
-      setBDistance(33 - (t2 * factor - 114));
+      setStartPointLeftShape(0 - (t2 * factor - 114));
+      setX1LeftShape(51 - (t2 * factor - 114) / 2);
+      setX2LeftShape(55 - (t2 * factor - 114) / 2);
+      setX3LeftShape(61 - (t2 * factor - 114) / 2);
+      setX4LeftShape(64 - (t2 * factor - 114) / 2);
     } else {
-      setALeftShape(114 - (114 - t2 * factor));
-      setBDistance(33 + (114 - t2 * factor));
-      // setBDistance(bDistance + (114 - t2 * factor));
-      setX1LeftShape(51 - (114 - t2 * factor) / 2);
-      setX2LeftShape(55 - (114 - t2 * factor) / 2);
-      setX3LeftShape(61 - (114 - t2 * factor) / 2);
-      setX4LeftShape(64 - (114 - t2 * factor) / 2);
+      setStartPointLeftShape(114 - t2 * factor);
+      setX1LeftShape(51 + (114 - t2 * factor) / 2);
+      setX2LeftShape(55 + (114 - t2 * factor) / 2);
+      setX3LeftShape(61 + (114 - t2 * factor) / 2);
+      setX4LeftShape(64 + (114 - t2 * factor) / 2);
     }
     setR(r);
-  }, [type, factor, t1, t2, r, aLeftShape]);
+  }, [type, factor, t1, t2, r]);
   const handelOnChangeBDistance = (e) => {
     setBDistance(parseInt(e.target.value));
     if (e.target.value >= 33) {
@@ -213,7 +210,7 @@ export default function HyButt() {
           <LeftShape
             showDetails={showDetails}
             xCoordinateLeftShape={xCoordinateLeftShape}
-            aLeftShape={aLeftShape}
+            startPointLeftShape={startPointLeftShape}
             x1LeftShape={x1LeftShape}
             x2LeftShape={x2LeftShape}
             x3LeftShape={x3LeftShape}
@@ -224,7 +221,6 @@ export default function HyButt() {
             xCoordinateRightShape={xCoordinateRightShape}
             xCoordinateLeftShape={xCoordinateLeftShape}
             bDistance={bDistance * factor}
-            aLeftShape={aLeftShape}
             t2={t2}
           />
           <RightShape

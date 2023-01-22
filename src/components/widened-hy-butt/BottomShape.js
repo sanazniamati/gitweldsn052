@@ -5,7 +5,6 @@ function BottomShape({
   xCoordinateLeftShape,
   xCoordinateRightShape,
   bDistance,
-  aLeftShape,
   showDetails,
 }) {
   return (
@@ -15,12 +14,12 @@ function BottomShape({
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
-        points={[aLeftShape, 539, aLeftShape, 606]}
+        points={[114, 539, 114, 606]}
         dash={[10, 5]}
       />
       <Text
         visible={showDetails}
-        x={aLeftShape + bDistance / 2}
+        x={114 + bDistance / 2}
         y={626}
         text={"b"}
         fontSize={30}
@@ -28,7 +27,7 @@ function BottomShape({
       <Arrow
         visible={showDetails}
         x={xCoordinateLeftShape}
-        points={[aLeftShape + 3, 606, bDistance + aLeftShape - 3, 606]}
+        points={[114 + 3, 606, bDistance + 114 - 3, 606]}
         pointerLength={5}
         pointerWidth={5}
         pointerAtBeginning={true}
@@ -51,7 +50,6 @@ BottomShape.propTypes = {
   xCoordinateLeftShape: PropTypes.number.isRequired,
   xCoordinateRightShape: PropTypes.number.isRequired,
   bDistance: PropTypes.number.isRequired,
-  aLeftShape: PropTypes.number.isRequired,
   show: PropTypes.bool,
 };
 

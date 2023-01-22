@@ -6,12 +6,12 @@ import "konva/lib/shapes/Text";
 import "konva/lib/shapes/Arrow";
 function LeftShape({
   xCoordinateLeftShape,
-  aLeftShape,
   x1LeftShape,
   x2LeftShape,
   x3LeftShape,
   x4LeftShape,
   showDetails,
+  startPointLeftShape,
 }) {
   return (
     <Group>
@@ -20,7 +20,7 @@ function LeftShape({
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
-        points={[0, -56, 0, 0]}
+        points={[startPointLeftShape, -56, startPointLeftShape, 0]}
         dash={[10, 5]}
       />
       <Text
@@ -33,7 +33,7 @@ function LeftShape({
       <Arrow
         visible={showDetails}
         x={xCoordinateLeftShape}
-        points={[3, -56, aLeftShape - 3, -56]}
+        points={[startPointLeftShape + 3, -56, 114 - 3, -56]}
         pointerLength={5}
         pointerWidth={5}
         pointerAtBeginning={true}
@@ -46,7 +46,7 @@ function LeftShape({
         x={xCoordinateLeftShape}
         stroke={"green"}
         strokeWidth={3}
-        points={[aLeftShape, -56, aLeftShape, 0]}
+        points={[114, -56, 114, 0]}
         dash={[10, 5]}
       />
 
@@ -54,18 +54,18 @@ function LeftShape({
         x={xCoordinateLeftShape}
         sceneFunc={(context, shape) => {
           context.beginPath();
-          context.moveTo(0, 0);
+          context.moveTo(startPointLeftShape, 0);
           context.lineTo(x1LeftShape, 0);
           context.lineTo(x2LeftShape, 16);
           context.lineTo(x3LeftShape, -19);
           context.lineTo(x4LeftShape, 0);
-          context.lineTo(aLeftShape, 0);
-          context.lineTo(aLeftShape, 539);
+          context.lineTo(114, 0);
+          context.lineTo(114, 539);
           context.lineTo(x4LeftShape, 539);
           context.lineTo(x3LeftShape, 523);
           context.lineTo(x2LeftShape, 555);
           context.lineTo(x1LeftShape, 539);
-          context.lineTo(0, 539);
+          context.lineTo(startPointLeftShape, 539);
           context.closePath();
           context.fillStrokeShape(shape);
         }}
@@ -77,7 +77,6 @@ function LeftShape({
 }
 LeftShape.propTypes = {
   xCoordinateLeftShape: PropTypes.number.isRequired,
-  aLeftShape: PropTypes.number.isRequired,
   x1LeftShape: PropTypes.number.isRequired,
   x2LeftShape: PropTypes.number.isRequired,
   x3LeftShape: PropTypes.number.isRequired,
