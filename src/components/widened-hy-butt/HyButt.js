@@ -4,8 +4,31 @@ import { useEffect, useState } from "react";
 import LeftShape from "./LeftShape";
 import BottomShape from "./BottomShape";
 import RightShape from "./RightShape";
+import Konva from "konva";
+import Rectangle from "../create-pik/Rectangle";
 
 export default function HyButt() {
+  const [selectShape, setSelectShape] = useState(null);
+  const [blobs, setBlobs] = useState([]);
+  const checkDeselect = (e) => {
+    // deselect when clicked on empty area
+    const clickedOnEmpty = e.target === e.target.getStage();
+    if (clickedOnEmpty) {
+      setSelectShape(null);
+    }
+  };
+  const handelCreateBlob = () => {
+    setBlobs((prevBlobs) => [
+      ...prevBlobs,
+      {
+        id: blobs.toString(),
+        x: blobs.length * 150,
+        color: Konva.Util.getRandomColor(),
+      },
+    ]);
+    console.log(blobs);
+  };
+  // for show details and position
   const [showDetails, setShowDetails] = useState(true);
   const marginXStage = 150;
   const marginYStage = 50;
@@ -150,7 +173,7 @@ export default function HyButt() {
   };
   const handelOnChangeR = (e) => {
     if (e.target.value > 0) {
-      setR(e.target.value);
+      setR(parseInt(e.target.value));
     } else {
       console.log("Error");
     }
@@ -196,6 +219,7 @@ export default function HyButt() {
       <input type={"number"} onChange={handelOnChangeR} value={r} />
       <button onClick={handelIncR}>R + </button>
       <button onClick={handelShowDetails}>on/off </button>
+      <button onClick={handelCreateBlob}> CreateBlob</button>
 
       <Stage
         width={window.innerWidth}
@@ -205,8 +229,29 @@ export default function HyButt() {
         x={position.x}
         y={position.y}
         onDragEnd={handelDragEnd}
+        onMouseDown={checkDeselect}
+        onTouchStart={checkDeselect}
       >
         <Layer>
+          {blobs.map((blob, g) => (
+            <Rectangle
+              key={blob.id}
+              id={blob.id}
+              color={blob.color}
+              shapeProps={blob}
+              isSelected={blob.id === selectShape}
+              onSelect={() => {
+                setSelectShape(blob.id);
+                console.log("Selected shape" + blob.id);
+              }}
+              onChange={(newAttrs) => {
+                const copyOfSheklha = blobs.slice();
+                copyOfSheklha[g] = newAttrs;
+                // console.log(newAttrs);
+                setBlobs(copyOfSheklha);
+              }}
+            />
+          ))}
           <LeftShape
             showDetails={showDetails}
             xCoordinateLeftShape={xCoordinateLeftShape}
